@@ -1,11 +1,6 @@
-use lab_mysql;
-select*from customers;
-update customers
-set cust_email="ppicasso@gmail.com"
-where cust_name="Pablo Picasso";
-update customers
-set cust_email="lincoln@us.gov"
-where id =5;
-update customers
-set cust_email="hello@napoleon.me"
-where cust_id = 30001;
+USE lab_mysql;
+SET SQL_SAFE_UPDATES = 0;
+
+UPDATE customers SET cust_email = 'ppicasso@gmail.com' WHERE cust_name = 'Pablo Picasso';
+UPDATE customers SET cust_email = 'lincoln@us.gov' WHERE cust_name = 'Abraham Lincoln';
+UPDATE customers SET cust_email = 'hello@napoleon.me' WHERE cust_name = 'Napoléon Bonaparte';
