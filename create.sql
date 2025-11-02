@@ -1,16 +1,53 @@
 CREATE DATABASE IF NOT EXISTS lab_mysql;
-
 USE lab_mysql;
+
+-- Cars Table
 DROP TABLE IF EXISTS cars;
 CREATE TABLE cars (
-id int,vin varchar(17),manufacturer varchar(50),model varchar(30),year int,color varchar(20)
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    vin VARCHAR(20) NOT NULL,
+    manufacturer VARCHAR(50),
+    model VARCHAR(50),
+    year INT,
+    color VARCHAR(20)
 );
-insert into cars(id,vin,manufacturer,model,year,color)
-values (1,"3K096I98581DHSNUP","Volkswagen","Tiguan",2019,"Blue"),
-        (2,"ZM8G7BEUQZ97IH46V","Peugeot","Rifter",2019,"Red"),
-        (3,"RKXVNNIHLVVZOUB4M","Ford","Fusion",2018,"White"),
-        (4,"HKNDGS7CU31E9Z7JW","Toyota","RAV4",2018,"Silver"),
-        (5,"DAM41UDN3CHU2WVF6","Volvo","V60",2019,"Gray"),
-        (6,"DAM41UDN3CHU2WVF6","Volvo","V60 Cross Country",2019,"Gray");
-select*from cars;
+
+-- Customers Table
+DROP TABLE IF EXISTS customers;
+CREATE TABLE customers (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    cust_id INT UNIQUE,
+    cust_name VARCHAR(100),
+    cust_phone VARCHAR(20),
+    cust_email VARCHAR(100),
+    cust_address VARCHAR(100),
+    cust_city VARCHAR(50),
+    cust_state VARCHAR(50),
+    cust_country VARCHAR(50),
+    cust_zipcode VARCHAR(10)
+);
+
+-- Salespersons Table
+DROP TABLE IF EXISTS salespersons;
+CREATE TABLE salespersons (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    staff_id VARCHAR(10) UNIQUE,
+    name VARCHAR(100),
+    store VARCHAR(50)
+);
+
+-- Invoices Table
+DROP TABLE IF EXISTS invoices;
+CREATE TABLE invoices (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    invoice_number BIGINT,
+    date DATE,
+    car INT,
+    customer INT,
+    salesperson INT,
+    FOREIGN KEY (car) REFERENCES cars(id),
+    FOREIGN KEY (customer) REFERENCES customers(id),
+    FOREIGN KEY (salesperson) REFERENCES salespersons(id)
+);
+
 
